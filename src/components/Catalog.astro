@@ -1,32 +1,38 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 import BentoTile from '@/components/BentoTile.astro';
 import CakeCard from '@/components/CakeCard.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import WhatsAppIcon from '@/icons/WhatsAppIcon.astro';
 import { site } from '@/data/site';
+// ponytail: alfajores/tartas photos are low-res crops from the original flyer (335/398px wide) — replace with real photos when available
+import alfajoresImg from '@/assets/alfajores.png';
+import tartasImg from '@/assets/tartas.png';
 
 const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
 
 <section class="mx-auto max-w-5xl px-4">
-  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+  <div class="grid grid-cols-2 gap-3 sm:grid-cols-4">
     <BentoTile
       title="Tortas"
       href="#tortas"
-      size="lg"
+      class="col-span-2 aspect-[4/3] sm:row-span-2 sm:aspect-auto"
       image={cakes[0].data.image}
       imageHover={cakes[1]?.data.image}
     />
-    <div class="grid grid-cols-1 gap-3 sm:grid-rows-2">
-      <BentoTile title="Alfajores" href="#alfajores" emoji="🍪" gradientClass="bg-gold/30" />
-      <BentoTile title="Tartas" href="#tartas" emoji="🥧" gradientClass="bg-rose/30" />
-    </div>
+    <BentoTile href="#tortas" ariaLabel="Ver más tortas" class="aspect-square" image={cakes[2]?.data.image} />
+    <BentoTile href="#tortas" ariaLabel="Ver más tortas" class="aspect-square" image={cakes[3]?.data.image} />
+    <BentoTile title="Alfajores" href="#alfajores" image={alfajoresImg} class="aspect-square" />
+    <BentoTile title="Tartas" href="#tartas" image={tartasImg} class="aspect-square" />
   </div>
 </section>
 
 <section id="tortas" class="mx-auto max-w-5xl scroll-mt-20 px-4 py-16">
   <h2 class="font-script text-3xl italic text-cocoa">Tortas</h2>
   <p class="mt-1 text-cocoa/70">Para cumpleaños, 15 años y cualquier celebración: como más te guste, a tu elección.</p>
+  <p class="mt-1 text-sm text-cocoa/50">Tocá una foto para verla más grande.</p>
   <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
     {cakes.map((cake) => (
       <CakeCard title={cake.data.title} alt={cake.data.alt} image={cake.data.image} />
@@ -35,25 +41,97 @@ const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeC
 </section>
 
 <section id="alfajores" class="mx-auto max-w-5xl scroll-mt-20 px-4 py-16">
-  <div class="rounded-3xl bg-gold/15 p-8 text-center sm:p-12">
-    <h2 class="font-script text-3xl italic text-cocoa">Alfajores de maicena</h2>
-    <p class="mt-2 text-cocoa/70">Los mejores alfajores, dicho por muchísimas personas.</p>
-    <div class="mt-6">
-      <WhatsAppButton message={`Hola! Quiero consultar por alfajores de maicena en ${site.name}`}>
-        Consultar alfajores
-      </WhatsAppButton>
+  <div class="grid overflow-hidden rounded-3xl bg-gold/15 sm:grid-cols-2">
+    <Image
+      src={alfajoresImg}
+      alt="Plato de alfajores de maicena"
+      class="size-full max-h-64 object-cover sm:max-h-none"
+      widths={[335]}
+      sizes="(min-width: 640px) 50vw, 100vw"
+    />
+    <div class="flex flex-col items-center justify-center p-8 text-center sm:p-12">
+      <h2 class="font-script text-3xl italic text-cocoa">Alfajores de maicena</h2>
+      <p class="mt-2 text-cocoa/70">Los mejores alfajores, dicho por muchísimas personas.</p>
+      <div class="mt-6">
+        <WhatsAppButton message={`Hola! Quiero consultar por alfajores de maicena en ${site.name}`}>
+          Consultar alfajores
+        </WhatsAppButton>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="tartas" class="mx-auto max-w-5xl scroll-mt-20 px-4 py-16">
-  <div class="rounded-3xl bg-rose/15 p-8 text-center sm:p-12">
-    <h2 class="font-script text-3xl italic text-cocoa">Tartas</h2>
-    <p class="mt-2 text-cocoa/70">Mil variedades: dulce de leche, batata, membrillo, lemon pie y más.</p>
-    <div class="mt-6">
-      <WhatsAppButton message={`Hola! Quiero consultar por tartas en ${site.name}`}>
-        Consultar tartas
-      </WhatsAppButton>
+  <div class="grid overflow-hidden rounded-3xl bg-rose/15 sm:grid-cols-2">
+    <Image
+      src={tartasImg}
+      alt="Tartas de frutilla, dulce y lemon pie"
+      class="size-full max-h-64 object-cover sm:order-2 sm:max-h-none"
+      widths={[398]}
+      sizes="(min-width: 640px) 50vw, 100vw"
+    />
+    <div class="flex flex-col items-center justify-center p-8 text-center sm:order-1 sm:p-12">
+      <h2 class="font-script text-3xl italic text-cocoa">Tartas</h2>
+      <p class="mt-2 text-cocoa/70">Mil variedades: dulce de leche, batata, membrillo, lemon pie y más.</p>
+      <div class="mt-6">
+        <WhatsAppButton message={`Hola! Quiero consultar por tartas en ${site.name}`}>
+          Consultar tartas
+        </WhatsAppButton>
+      </div>
     </div>
   </div>
 </section>
+
+<dialog
+  id="lightbox"
+  aria-labelledby="lightbox-title"
+  class="m-auto w-[min(92vw,38rem)] rounded-3xl bg-cream p-0 shadow-2xl backdrop:bg-cocoa/60 backdrop:backdrop-blur-sm"
+>
+  <div class="relative">
+    <img id="lightbox-img" src="" alt="" class="max-h-[70vh] w-full rounded-t-3xl bg-white object-contain" />
+    <button
+      id="lightbox-close"
+      type="button"
+      aria-label="Cerrar"
+      class="absolute right-3 top-3 grid size-9 place-items-center rounded-full bg-cocoa/60 text-white transition hover:bg-cocoa/80"
+    >
+      ✕
+    </button>
+    <div class="flex flex-wrap items-center justify-between gap-3 px-5 py-4">
+      <p id="lightbox-title" class="font-script text-xl italic text-cocoa"></p>
+      <a
+        id="lightbox-wa"
+        href="#"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 rounded-full bg-whatsapp px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:brightness-105"
+      >
+        <WhatsAppIcon class="size-5" />
+        Encargar una así
+      </a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('lightbox') as HTMLDialogElement;
+  const img = document.getElementById('lightbox-img') as HTMLImageElement;
+  const title = document.getElementById('lightbox-title')!;
+  const wa = document.getElementById('lightbox-wa') as HTMLAnchorElement;
+
+  for (const btn of document.querySelectorAll<HTMLElement>('[data-lightbox]')) {
+    btn.addEventListener('click', () => {
+      img.src = btn.dataset.full ?? '';
+      img.alt = btn.dataset.alt ?? '';
+      title.textContent = btn.dataset.title ?? '';
+      wa.href = btn.dataset.wa ?? '#';
+      dialog.showModal();
+    });
+  }
+
+  // ponytail: click on the dialog element itself = backdrop (content is wrapped in a full-size div)
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+  document.getElementById('lightbox-close')!.addEventListener('click', () => dialog.close());
+</script>
