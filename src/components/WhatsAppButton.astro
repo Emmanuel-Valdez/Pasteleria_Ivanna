@@ -1,0 +1,26 @@
+---
+import WhatsAppIcon from '@/icons/WhatsAppIcon.astro';
+import { whatsappHref } from '@/data/site';
+
+interface Props {
+  message: string;
+  class?: string;
+  size?: 'lg' | 'md';
+}
+
+const { message, class: className, size = 'md' } = Astro.props;
+const sizeClasses =
+  size === 'lg'
+    ? 'px-8 py-4 text-lg'
+    : 'px-5 py-3 text-sm';
+---
+
+<a
+  href={whatsappHref(message)}
+  target="_blank"
+  rel="noopener noreferrer"
+  class={`inline-flex items-center justify-center gap-2 rounded-full bg-whatsapp font-semibold text-white shadow-md transition hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${sizeClasses} ${className ?? ''}`}
+>
+  <WhatsAppIcon class="size-5" />
+  <slot>Consultar por WhatsApp</slot>
+</a>

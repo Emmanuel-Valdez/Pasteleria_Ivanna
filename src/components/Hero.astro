@@ -1,0 +1,26 @@
+---
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import { site } from '@/data/site';
+---
+
+<section id="top" class="relative overflow-hidden px-4 pb-16 pt-14 text-center">
+  <svg class="pointer-events-none absolute -left-6 -top-6 size-28 text-rose/25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+    <path d="M10 90 C 10 40, 40 10, 90 10" stroke="currentColor" stroke-width="2" />
+    <path d="M20 90 C 20 50, 50 20, 90 20" stroke="currentColor" stroke-width="2" />
+  </svg>
+  <svg class="pointer-events-none absolute -right-6 -top-6 size-28 rotate-90 text-gold/25" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+    <path d="M10 90 C 10 40, 40 10, 90 10" stroke="currentColor" stroke-width="2" />
+    <path d="M20 90 C 20 50, 50 20, 90 20" stroke="currentColor" stroke-width="2" />
+  </svg>
+
+  <h1 class="font-script text-5xl italic text-cocoa sm:text-6xl">{site.name}</h1>
+  <p class="mx-auto mt-3 max-w-md text-lg text-cocoa/70">{site.slogan}</p>
+  <p class="mx-auto mt-1 max-w-md text-cocoa/70">
+    Tortas personalizadas a pedido, alfajores de maicena y tartas — para cumpleaños, 15 años y cualquier celebración.
+  </p>
+  <div class="mt-8">
+    <WhatsAppButton size="lg" message={`Hola! Quiero encargar una torta en ${site.name}`}>
+      Encargá tu torta por WhatsApp
+    </WhatsAppButton>
+  </div>
+</section>

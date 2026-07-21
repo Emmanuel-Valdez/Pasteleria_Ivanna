@@ -1,0 +1,14 @@
+---
+import WhatsAppIcon from '@/icons/WhatsAppIcon.astro';
+import { whatsappHref, site } from '@/data/site';
+---
+
+<a
+  href={whatsappHref(`Hola! Quiero consultar por un pedido en ${site.name}`)}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Consultar por WhatsApp"
+  class="fixed bottom-5 right-5 z-30 flex size-14 items-center justify-center rounded-full bg-whatsapp text-white shadow-lg transition hover:brightness-105 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+>
+  <WhatsAppIcon class="size-7" />
+</a>

@@ -1,0 +1,17 @@
+---
+import { site } from '@/data/site';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer id="contacto" class="mt-16 bg-cocoa text-cream">
+  <div class="mx-auto flex max-w-5xl flex-col items-center gap-4 px-4 py-10 text-center">
+    <p class="font-script text-2xl italic">{site.name}</p>
+    <p class="text-cream/80">{site.slogan}</p>
+    <WhatsAppButton size="lg" message={`Hola! Quiero consultar por un pedido en ${site.name}`}>
+      Escribinos al {site.phoneDisplay}
+    </WhatsAppButton>
+    <p class="mt-4 text-xs text-cream/50">© {currentYear} {site.name}</p>
+  </div>
+</footer>

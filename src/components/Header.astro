@@ -1,0 +1,18 @@
+---
+import { site } from '@/data/site';
+---
+
+<header class="sticky top-0 z-20 border-b border-rose/20 bg-cream/90 backdrop-blur">
+  <nav
+    aria-label="Principal"
+    class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3"
+  >
+    <a href="#top" class="font-script text-2xl italic text-cocoa">{site.name}</a>
+    <ul class="flex flex-wrap items-center gap-x-5 gap-y-1 text-sm font-medium text-cocoa/80">
+      <li><a class="transition hover:text-rose" href="#tortas">Tortas</a></li>
+      <li><a class="transition hover:text-rose" href="#alfajores">Alfajores</a></li>
+      <li><a class="transition hover:text-rose" href="#tartas">Tartas</a></li>
+      <li><a class="transition hover:text-rose" href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+</header>

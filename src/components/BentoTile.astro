@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title: string;
+  href: string;
+  size?: 'lg' | 'sm';
+  image?: ImageMetadata;
+  imageHover?: ImageMetadata;
+  emoji?: string;
+  gradientClass?: string;
+}
+
+const { title, href, size = 'sm', image, imageHover, emoji, gradientClass } = Astro.props;
+const heightClass = size === 'lg' ? 'aspect-[4/3] sm:aspect-[16/10]' : 'aspect-[4/3]';
+---
+
+<a
+  href={href}
+  class={`group relative block overflow-hidden rounded-3xl shadow-sm ${heightClass}`}
+>
+  {image ? (
+    <>
+      <Image
+        src={image}
+        alt=""
+        class={`absolute inset-0 size-full object-cover transition-opacity duration-500 ${imageHover ? 'group-hover:opacity-0' : ''}`}
+        widths={[400, 800]}
+        sizes="(min-width: 768px) 50vw, 100vw"
+      />
+      {imageHover && (
+        <Image
+          src={imageHover}
+          alt=""
+          class="absolute inset-0 size-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          widths={[400, 800]}
+          sizes="(min-width: 768px) 50vw, 100vw"
+        />
+      )}
+      <div class="absolute inset-0 bg-gradient-to-t from-cocoa/70 via-cocoa/10 to-transparent" />
+    </>
+  ) : (
+    /* ponytail: emoji instead of a custom icon set for the two categories without photos yet — swap for a real photo tile once Alfajores/Tartas pictures exist */
+    <div class={`absolute inset-0 flex items-center justify-center text-5xl ${gradientClass}`}>
+      <span aria-hidden="true">{emoji}</span>
+    </div>
+  )}
+  <span class="absolute bottom-4 left-4 font-script text-2xl italic text-white drop-shadow-sm">
+    {title}
+  </span>
+</a>

@@ -1,0 +1,59 @@
+---
+import { getCollection } from 'astro:content';
+import BentoTile from '@/components/BentoTile.astro';
+import CakeCard from '@/components/CakeCard.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import { site } from '@/data/site';
+
+const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<section class="mx-auto max-w-5xl px-4">
+  <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+    <BentoTile
+      title="Tortas"
+      href="#tortas"
+      size="lg"
+      image={cakes[0].data.image}
+      imageHover={cakes[1]?.data.image}
+    />
+    <div class="grid grid-cols-1 gap-3 sm:grid-rows-2">
+      <BentoTile title="Alfajores" href="#alfajores" emoji="🍪" gradientClass="bg-gold/30" />
+      <BentoTile title="Tartas" href="#tartas" emoji="🥧" gradientClass="bg-rose/30" />
+    </div>
+  </div>
+</section>
+
+<section id="tortas" class="mx-auto max-w-5xl scroll-mt-20 px-4 py-16">
+  <h2 class="font-script text-3xl italic text-cocoa">Tortas</h2>
+  <p class="mt-1 text-cocoa/70">Para cumpleaños, 15 años y cualquier celebración: como más te guste, a tu elección.</p>
+  <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+    {cakes.map((cake) => (
+      <CakeCard title={cake.data.title} alt={cake.data.alt} image={cake.data.image} />
+    ))}
+  </div>
+</section>
+
+<section id="alfajores" class="mx-auto max-w-5xl scroll-mt-20 px-4 py-16">
+  <div class="rounded-3xl bg-gold/15 p-8 text-center sm:p-12">
+    <h2 class="font-script text-3xl italic text-cocoa">Alfajores de maicena</h2>
+    <p class="mt-2 text-cocoa/70">Los mejores alfajores, dicho por muchísimas personas.</p>
+    <div class="mt-6">
+      <WhatsAppButton message={`Hola! Quiero consultar por alfajores de maicena en ${site.name}`}>
+        Consultar alfajores
+      </WhatsAppButton>
+    </div>
+  </div>
+</section>
+
+<section id="tartas" class="mx-auto max-w-5xl scroll-mt-20 px-4 py-16">
+  <div class="rounded-3xl bg-rose/15 p-8 text-center sm:p-12">
+    <h2 class="font-script text-3xl italic text-cocoa">Tartas</h2>
+    <p class="mt-2 text-cocoa/70">Mil variedades: dulce de leche, batata, membrillo, lemon pie y más.</p>
+    <div class="mt-6">
+      <WhatsAppButton message={`Hola! Quiero consultar por tartas en ${site.name}`}>
+        Consultar tartas
+      </WhatsAppButton>
+    </div>
+  </div>
+</section>
