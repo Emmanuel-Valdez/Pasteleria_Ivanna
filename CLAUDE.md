@@ -37,4 +37,12 @@ Warm bakery palette (not the portfolio's dark-navy/gold), defined as named color
 
 ## Deploy
 
-Not yet deployed. `Dockerfile` / `docker-compose.yml` / `nginx.conf` set up a standard Node build → static Nginx container, with the container bound to `127.0.0.1:8082` on the host. Domain, the VPS-level Nginx server block, and Certbot cert are not set up yet — see the plan file this project was built from for the pending deploy checklist.
+Not yet deployed. `Dockerfile` / `docker-compose.yml` / `nginx.conf` set up a standard Node build → static Nginx container, with the container bound to `127.0.0.1:8082` on the host.
+
+**Plan, phase 2 — CI/CD:** `.github/workflows/docker-build.yml` builds the Docker image on every push/PR (catches a broken `npm run build` before it reaches the VPS), and on push to `master` also pushes it to GHCR as `ghcr.io/emmanuel-valdez/pasteleria_ivanna:latest` and `:<sha>` — no extra secrets needed, it uses the built-in `GITHUB_TOKEN`. The `deploy` job (SSH to the VPS, `docker compose pull && up -d`) is written but commented out in that file, waiting on:
+
+- Domain pointed at the VPS
+- VPS-level Nginx server block + Certbot cert
+- `VPS_HOST` / `VPS_USER` / `VPS_SSH_KEY` repo secrets
+
+Once those exist, uncomment the `deploy` job and point `docker-compose.yml` at the GHCR image instead of `build: .`.
