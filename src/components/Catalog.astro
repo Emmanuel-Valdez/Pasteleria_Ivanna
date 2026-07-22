@@ -6,9 +6,9 @@ import CakeCard from '@/components/CakeCard.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import WhatsAppIcon from '@/icons/WhatsAppIcon.astro';
 import { site } from '@/data/site';
-// ponytail: alfajores/tartas photos are low-res crops from the original flyer (335/398px wide) — replace with real photos when available
 import alfajoresImg from '@/assets/alfajores.png';
 import tartasImg from '@/assets/tartas.png';
+import lemonpieImg from '@/assets/lemonpie.png';
 
 const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeCompare(b.data.title));
 ---
@@ -35,7 +35,7 @@ const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeC
   <p class="mt-1 text-sm text-cocoa/50">Tocá una foto para verla más grande.</p>
   <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
     {cakes.map((cake) => (
-      <CakeCard title={cake.data.title} alt={cake.data.alt} image={cake.data.image} />
+      <CakeCard title={cake.data.title} alt={cake.data.alt} image={cake.data.image} imageHover={cake.data.imageHover} />
     ))}
   </div>
 </section>
@@ -46,7 +46,7 @@ const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeC
       src={alfajoresImg}
       alt="Plato de alfajores de maicena"
       class="size-full max-h-64 object-cover sm:max-h-none"
-      widths={[335]}
+      widths={[370, 740]}
       sizes="(min-width: 640px) 50vw, 100vw"
     />
     <div class="flex flex-col items-center justify-center p-8 text-center sm:p-12">
@@ -61,18 +61,27 @@ const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeC
   </div>
 </section>
 
-<section id="tartas" class="mx-auto max-w-5xl scroll-mt-20 px-4 py-16">
-  <div class="grid overflow-hidden rounded-3xl bg-rose/15 sm:grid-cols-2">
+<section id="tartas" class="relative mx-auto max-w-5xl scroll-mt-20 overflow-hidden px-4 py-16">
+  <Image
+    src={lemonpieImg}
+    alt=""
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10 size-full scale-125 object-cover opacity-40 blur-2xl"
+    widths={[700]}
+    sizes="100vw"
+  />
+  <div class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-cream/30 via-cream/70 to-cream" aria-hidden="true"></div>
+  <div class="grid overflow-hidden rounded-3xl bg-rose/15 backdrop-blur-sm sm:grid-cols-2">
     <Image
       src={tartasImg}
-      alt="Tartas de frutilla, dulce y lemon pie"
+      alt="Tarta de frutilla con crema"
       class="size-full max-h-64 object-cover sm:order-2 sm:max-h-none"
-      widths={[398]}
+      widths={[600, 1000]}
       sizes="(min-width: 640px) 50vw, 100vw"
     />
     <div class="flex flex-col items-center justify-center p-8 text-center sm:order-1 sm:p-12">
       <h2 class="font-script text-3xl italic text-cocoa">Tartas</h2>
-      <p class="mt-2 text-cocoa/70">Mil variedades: dulce de leche, batata, membrillo, lemon pie y más.</p>
+      <p class="mt-2 text-cocoa/70">Frutilla, naranja, cabsha, coco y dulce de leche, lemon pie, ricota y más.</p>
       <div class="mt-6">
         <WhatsAppButton message={`Hola! Quiero consultar por tartas en ${site.name}`}>
           Consultar tartas

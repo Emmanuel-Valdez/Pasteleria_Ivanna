@@ -7,6 +7,7 @@ const cakes = defineCollection({
       title: z.string(),
       category: z.literal('tortas'),
       image: image(),
+      imageHover: image().optional(),
       alt: z.string(),
     }),
 });

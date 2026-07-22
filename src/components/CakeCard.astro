@@ -7,9 +7,10 @@ interface Props {
   title: string;
   alt: string;
   image: ImageMetadata;
+  imageHover?: ImageMetadata;
 }
 
-const { title, alt, image } = Astro.props;
+const { title, alt, image, imageHover } = Astro.props;
 const full = await getImage({ src: image, width: 1080, format: 'webp' });
 ---
 
@@ -27,10 +28,19 @@ const full = await getImage({ src: image, width: 1080, format: 'webp' });
     <Image
       src={image}
       alt={alt}
-      class="size-full object-cover transition duration-500 group-hover:scale-105"
+      class={`size-full object-cover transition duration-500 group-hover:scale-105 ${imageHover ? 'group-hover:opacity-0' : ''}`}
       widths={[300, 600]}
       sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
     />
+    {imageHover && (
+      <Image
+        src={imageHover}
+        alt=""
+        class="absolute inset-0 size-full object-cover opacity-0 transition duration-500 group-hover:scale-105 group-hover:opacity-100"
+        widths={[300, 600]}
+        sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+      />
+    )}
   </div>
   <div class="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-cocoa/80 to-transparent px-3 pb-2.5 pt-10 text-left">
     <p class="text-sm font-medium text-white drop-shadow-sm">{title}</p>
