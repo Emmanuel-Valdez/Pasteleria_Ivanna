@@ -1,6 +1,6 @@
 services:
   pasteleria-ivanna:
-    build: .
+    image: ghcr.io/emmanuel-valdez/pasteleria_ivanna:latest
     container_name: pasteleria-ivanna
     ports:
       - "127.0.0.1:8082:80"
