@@ -42,21 +42,18 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  # ponytail: deploy step waits on domain/VPS access (see CLAUDE.md Deploy
-  # section). Once that's ready: add VPS_HOST / VPS_USER / VPS_SSH_KEY repo
-  # secrets and uncomment this job.
-  # deploy:
-  #   needs: build
-  #   if: github.ref == 'refs/heads/master'
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Deploy to VPS
-  #       uses: appleboy/ssh-action@v1
-  #       with:
-  #         host: ${{ secrets.VPS_HOST }}
-  #         username: ${{ secrets.VPS_USER }}
-  #         key: ${{ secrets.VPS_SSH_KEY }}
-  #         script: |
-  #           cd /path/to/pasteleria-ivanna
-  #           docker compose pull
-  #           docker compose up -d
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /opt/pasteleria-ivanna
+            docker compose pull
+            docker compose up -d
