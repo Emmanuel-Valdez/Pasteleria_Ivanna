@@ -31,7 +31,7 @@ const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeC
 
 <section id="tortas" class="mx-auto max-w-5xl scroll-mt-20 px-4 py-16">
   <h2 class="font-script text-3xl italic text-cocoa">Tortas</h2>
-  <p class="mt-1 text-cocoa/70">Para cumpleaños, 15 años y cualquier celebración: como más te guste, a tu elección.</p>
+  <p class="mt-1 text-cocoa/70">Cumpleaños de 15, 18 o lo que estés festejando — la torta se arma como la imagines.</p>
   <p class="mt-1 text-sm text-cocoa/50">Tocá una foto para verla más grande.</p>
   <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
     {cakes.map((cake) => (
@@ -51,10 +51,10 @@ const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeC
     />
     <div class="flex flex-col items-center justify-center p-8 text-center sm:p-12">
       <h2 class="font-script text-3xl italic text-cocoa">Alfajores de maicena</h2>
-      <p class="mt-2 text-cocoa/70">Los mejores alfajores, dicho por muchísimas personas.</p>
+      <p class="mt-2 text-cocoa/70">Los que te piden que lleves cuando hay mate en el laburo.</p>
       <div class="mt-6">
         <WhatsAppButton message={`Hola! Quiero consultar por alfajores de maicena en ${site.name}`}>
-          Consultar alfajores
+          Pedir alfajores
         </WhatsAppButton>
       </div>
     </div>
@@ -84,7 +84,7 @@ const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeC
       <p class="mt-2 text-cocoa/70">Frutilla, naranja, cabsha, coco y dulce de leche, lemon pie, ricota y más.</p>
       <div class="mt-6">
         <WhatsAppButton message={`Hola! Quiero consultar por tartas en ${site.name}`}>
-          Consultar tartas
+          Encargar tartas
         </WhatsAppButton>
       </div>
     </div>

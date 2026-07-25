@@ -1,6 +1,6 @@
 export const site = {
   name: 'Pastelería Ivanna',
-  slogan: 'Hecho con mucho amor',
+  slogan: 'Cuando hay festejo, hay torta',
   whatsappNumber: '5492616650028',
   phoneDisplay: '261 665-0028',
 };
