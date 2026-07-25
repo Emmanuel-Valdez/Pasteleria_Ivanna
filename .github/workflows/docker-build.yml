@@ -60,5 +60,7 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             cd /opt/pasteleria-ivanna
+            git config --global --add safe.directory /opt/pasteleria-ivanna
+            git pull
             docker compose pull
             docker compose up -d
