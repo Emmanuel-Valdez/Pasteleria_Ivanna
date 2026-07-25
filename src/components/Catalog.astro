@@ -31,7 +31,7 @@ const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeC
 
 <section id="tortas" class="mx-auto max-w-5xl scroll-mt-20 px-4 py-16">
   <h2 class="font-script text-3xl italic text-cocoa">Tortas</h2>
-  <p class="mt-1 text-cocoa/70">Cumpleaños de 15, 18 o lo que estés festejando — la torta se arma como la imagines.</p>
+  <p class="mt-1 text-cocoa/70">Ya sea un 15, un 18, un cumple o lo que quieras festejar — la torta la armás como vos la imaginás.</p>
   <p class="mt-1 text-sm text-cocoa/50">Tocá una foto para verla más grande.</p>
   <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
     {cakes.map((cake) => (
@@ -51,7 +51,7 @@ const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeC
     />
     <div class="flex flex-col items-center justify-center p-8 text-center sm:p-12">
       <h2 class="font-script text-3xl italic text-cocoa">Alfajores de maicena</h2>
-      <p class="mt-2 text-cocoa/70">Los que te piden que lleves cuando hay mate en el laburo.</p>
+      <p class="mt-2 text-cocoa/70">Los clásicos que siempre se terminan cuando juntás a familia o amigos con mate.</p>
       <div class="mt-6">
         <WhatsAppButton message={`Hola! Quiero consultar por alfajores de maicena en ${site.name}`}>
           Pedir alfajores
@@ -81,7 +81,7 @@ const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeC
     />
     <div class="flex flex-col items-center justify-center p-8 text-center sm:order-1 sm:p-12">
       <h2 class="font-script text-3xl italic text-cocoa">Tartas</h2>
-      <p class="mt-2 text-cocoa/70">Frutilla, naranja, cabsha, coco y dulce de leche, lemon pie, ricota y más.</p>
+      <p class="mt-2 text-cocoa/70">De frutilla, naranja, cabsha, lemon pie, ricota y más — caseras y riquísimas.</p>
       <div class="mt-6">
         <WhatsAppButton message={`Hola! Quiero consultar por tartas en ${site.name}`}>
           Encargar tartas
@@ -116,7 +116,7 @@ const cakes = (await getCollection('cakes')).sort((a, b) => a.data.title.localeC
         class="inline-flex items-center gap-2 rounded-full bg-whatsapp px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:brightness-105"
       >
         <WhatsAppIcon class="size-5" />
-        Encargar una así
+        Quiero una así
       </a>
     </div>
   </div>
