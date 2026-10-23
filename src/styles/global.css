@@ -1,3 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #faf6ec;
+  --color-cocoa: #4a2e1e;
+  --color-rose: #d88c9a;
+  --color-gold: #c9a227;
+  --color-whatsapp: #25d366;
+  --font-script: "Playfair Display", serif;
+}
